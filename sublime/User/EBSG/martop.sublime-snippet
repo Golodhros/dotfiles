@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+l-mar-top
+]]></content>
+    <tabTrigger>cocomonster</tabTrigger>
+    <scope>source.css meta.property-list.css - meta.property-value.css, source.less - meta.property-value.css, source.scss - meta.property-list - support.function.name.sass.library - variable.other.root,
+        text.css</scope>
+    <description>margin-top</description>
+</snippet>

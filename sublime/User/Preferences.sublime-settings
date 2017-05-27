@@ -1,0 +1,51 @@
+{
+	"atomic_save": false,
+	"bold_folder_labels": true,
+	"caret_extra_bottom": 2,
+	"caret_extra_top": 2,
+	"caret_extra_width": 4,
+	"caret_style": "phase",
+	"codeintel_config":
+	{
+		"Python":
+		{
+			"pythonExtraPaths":
+			[
+				"/Users/miglesias/eventbrite/core/",
+				"/Users/miglesias/eventbrite/core/django/src/www",
+				"/Users/miglesias/eventbrite/core/django/src/www/eventbrite",
+				"/Users/miglesias/eventbrite/python_venv/eb/lib/python2.6/site-packages"
+			]
+		}
+	},
+	"color_scheme": "Packages/User/SublimeLinter/Pastels on Dark (Flake8Lint) (SL).tmTheme",
+	"detect_indentation": true,
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"draw_white_space": "selection",
+	"fade_fold_buttons": false,
+	"font_size": 13,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"match_brackets_angle": true,
+	"overlay_scroll_bars": "enabled",
+	"python_package_paths":
+	[
+		"/Users/miglesias/eventbrite/core/",
+		"/Users/miglesias/eventbrite/core/django/src/www",
+		"/Users/miglesias/eventbrite/core/django/src/www/eventbrite",
+		"/Users/miglesias/eventbrite/python_venv/eb/lib/python2.6/site-packages"
+	],
+	"scroll_past_end": true,
+	"tab_size": 4,
+	"theme": "Seti_orig.sublime-theme",
+	"trailing_spaces_trim_on_save": true,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"wide_caret": true
+}

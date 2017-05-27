@@ -1,0 +1,20 @@
+[
+    { "keys": ["alt+up"], "command": "scroll_lines", "args": {"amount": 3.0 } },
+    { "keys": ["alt+down"], "command": "scroll_lines", "args": {"amount": -3.0 } },
+    { "keys": ["super+shift+w"], "command": "close_all" },
+    { "keys": ["super+shift+s"], "command": "save_all" },
+    // Reindent
+    { "keys": ["ctrl+shift+f"], "command": "reindent"},
+    // Alignment
+    { "keys": ["super+ctrl+a"], "command": "alignment" },
+    // Trailing Spaces
+    { "keys": ["super+shift+t"], "command": "delete_trailing_spaces" },
+    { "keys": ["alt+super+s"], "command": "prompt_save_as" },
+    { "keys": ["super+n"], "command": "new_window" },
+    // Inverted Pastes
+    { "keys": ["super+v"], "command": "paste_and_indent" },
+    { "keys": ["super+shift+v"], "command": "paste" }
+]
+
+
+
