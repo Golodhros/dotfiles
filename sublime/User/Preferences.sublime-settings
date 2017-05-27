@@ -28,6 +28,7 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"lispindent",
 		"Vintage"
 	],
 	"line_padding_bottom": 1,
