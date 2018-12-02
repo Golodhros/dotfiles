@@ -13,7 +13,11 @@
     { "keys": ["super+n"], "command": "new_window" },
     // Inverted Pastes
     { "keys": ["super+v"], "command": "paste_and_indent" },
-    { "keys": ["super+shift+v"], "command": "paste" }
+    { "keys": ["super+shift+v"], "command": "paste" },
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+    // Python debugger
+    {"keys": ["command+shift+i"], "command": "insert_snippet", "args": {"contents": "import ipdb; ipdb.set_trace()"} }
 ]
 
 
