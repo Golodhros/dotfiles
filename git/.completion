@@ -1,0 +1,14 @@
+#   Git Autocomplete
+#   To Setup:
+#   1) Save the .git-completion.bash file found here:
+#   https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+
+#   Add git completion to aliases
+    __git_complete gs _git_status_-s
+    __git_complete gb _git_branch
+    __git_complete go _git_checkout
+    __git_complete gd _git_diff
+    __git_complete gc _git_commit
+fi
