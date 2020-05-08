@@ -1,0 +1,3 @@
+# Paths
+export DOTFILES="$HOME/.dotfiles"
+export LIBRARY="$HOME/Library"
