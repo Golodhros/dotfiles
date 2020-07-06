@@ -40,5 +40,9 @@ alias weather="curl -4 http://wttr.in"
 #   ------------------------------------------------------------
 showa () { /usr/bin/grep --color=always -i -a1 $@ $DOTFILES/bash/.bash_aliases | grep -v '^\s*$' | less -FSRXc ; }
 
+#   WebDeb
+#   ------------------------------------------------------------
+alias gimmeServer='python -m SimpleHTTPServer'
+
 
 # Reference https://gist.github.com/natelandau/10654137
