@@ -2,8 +2,8 @@
 #   ---------------------------
 
 #   List Files
-alias ls='ls -FGlAhp' 
-alias sl='ls -FGlAhp' 
+alias ls='ls -FGlAhp --color=auto' 
+alias sl='ls -FGlAhp --color=auto' 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
