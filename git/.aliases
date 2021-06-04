@@ -1,7 +1,7 @@
 #   Git Aliases
 alias gs="git status -s"
 alias gb="git branch"
-alias go="git checkout "
+alias gt="git checkout "
 alias gd="git diff"
 alias gc="git commit"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cg  reen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"

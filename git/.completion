@@ -8,7 +8,7 @@ if [ -f ~/.git-completion.bash ]; then
 #   Add git completion to aliases
     __git_complete gs _git_status_-s
     __git_complete gb _git_branch
-    __git_complete go _git_checkout
+    __git_complete gt _git_checkout
     __git_complete gd _git_diff
     __git_complete gc _git_commit
 fi
