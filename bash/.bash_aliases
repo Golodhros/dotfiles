@@ -2,15 +2,15 @@
 #   ---------------------------
 
 #   List Files
-alias ls='ls -FGlAhp --color=auto' 
-alias sl='ls -FGlAhp --color=auto' 
+alias ls='ls -FGlAhp'
+alias sl='ls -FGlAhp'
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 
 alias less='less -FSRXc'                    # Preferred 'less' implementation
 cd() { builtin cd "$@"; ls; }               # Always list directory contents upon 'cd'
-alias cd..='cd ../'  
+alias cd..='cd ../'
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 
