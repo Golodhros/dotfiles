@@ -1,0 +1,83 @@
+{
+  "editor.fontLigatures": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnPaste": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.workingDirectories": [
+    { "mode": "auto" },
+    {
+      "directory": "upstream/amundsen_application/static",
+      "changeProcessCWD": true
+    }
+  ],
+  "eslint.options": {},
+  "workbench.colorTheme": "Monokai Seti",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.colorCustomizations": {
+    "[Monokai Seti]": {
+      "editor.findMatchHighlightBackground": "#ff00c3a7",
+      "editor.selectionBackground": "#e37933",
+      "editor.selectionHighlightBackground": "#f55385",
+      "editor.findMatchBackground": "#e37933"
+    }
+  },
+  "workbench.editor.showTabs": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[go]": {
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnSave": true,
+  "go.formatTool": "goimports",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "trailing-spaces.trimOnSave": true,
+  "window.zoomLevel": 1,
+  "go.toolsManagement.autoUpdate": true,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "http.systemCertificates": false,
+  "files.associations": {
+    "*.tsx": "typescriptreact"
+  }
+}
