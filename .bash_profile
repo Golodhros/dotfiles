@@ -14,7 +14,11 @@ fi
 if [ -f $DOTFILES/git/.aliases ]; then
    source $DOTFILES/git/.aliases
 fi
-
 if [ -f $DOTFILES/git/.completion ]; then
    source $DOTFILES/git/.completion
+fi
+
+# Extra
+if [ -f ~/.extra ]; then
+   source ~/.extra
 fi
