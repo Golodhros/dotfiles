@@ -19,5 +19,9 @@
     "key": "ctrl+space",
     "command": "-toggleSuggestionDetails",
     "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "cmd+m cmd+w",
+    "command": "editor.emmet.action.wrapWithAbbreviation"
   }
 ]

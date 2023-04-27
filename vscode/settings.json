@@ -2,6 +2,7 @@
   "editor.fontLigatures": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+    // "source.removeUnusedImports": true
   },
   "editor.formatOnPaste": true,
   "eslint.validate": [
@@ -35,18 +36,22 @@
     "editor.formatOnSave": true
   },
   "[json]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.formatOnSave": true,
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
   "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[sass]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
@@ -60,17 +65,17 @@
     "editor.formatOnSave": false
   },
   "[markdown]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnSave": true,
   "go.formatTool": "goimports",
+  "go.lintOnSave": "package",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
   "trailing-spaces.trimOnSave": true,
-  "window.zoomLevel": 1,
   "go.toolsManagement.autoUpdate": true,
   "notebook.cellToolbarLocation": {
     "default": "right",
@@ -78,6 +83,16 @@
   },
   "http.systemCertificates": false,
   "files.associations": {
-    "*.tsx": "typescriptreact"
+    "*.tsx": "typescriptreact",
+    ".env*": "makefile"
+  },
+  "files.insertFinalNewline": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.accessibilitySupport": "off",
+  "window.zoomLevel": 1,
+  "[python]": {
+    "editor.formatOnType": true
   }
 }
