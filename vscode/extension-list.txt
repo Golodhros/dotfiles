@@ -1,0 +1,7 @@
+adityavm.vscode-monokai-seti
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+golang.go
+mrmlnc.vscode-duplicate
+seti.seti
+shardulm94.trailing-spaces

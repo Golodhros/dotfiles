@@ -11,13 +11,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [
-    { "mode": "auto" },
-    {
-      "directory": "upstream/amundsen_application/static",
-      "changeProcessCWD": true
-    }
-  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "eslint.options": {},
   "workbench.colorTheme": "Monokai Seti",
   "explorer.confirmDelete": false,
@@ -91,7 +85,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.accessibilitySupport": "off",
-  "window.zoomLevel": 1,
   "[python]": {
     "editor.formatOnType": true
   }
