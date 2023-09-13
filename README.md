@@ -18,7 +18,7 @@ Feel free to explore, learn and copy parts for your own dotfiles.
 1. Install [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 1. Copy and paste `zsh/.zshenv` into your home folder
 1. Search in your Oh My Zsh generated `.zshrc` for the `ZSH_CUSTOM` variable and set it to `~/.dotfiles/zsh`
-1. Search for `for config_file ("$ZSH_CUSTOM"/*.zsh(N)); do`` in '/Users/marcosiglesias/.oh-my-zsh/oh-my-zsh.sh' and swap it with `for config_file ("$ZSH_CUSTOM"/.*); do`
+1. Search for `for config_file ("$ZSH_CUSTOM"/*.zsh(N)); do` in '/Users/marcosiglesias/.oh-my-zsh/oh-my-zsh.sh' and swap it with `for config_file ("$ZSH_CUSTOM"/.*); do`
 1. Run `install.sh` to start the installation
 
 ## For a Fresh Bash Install
