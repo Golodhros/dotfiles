@@ -42,7 +42,6 @@ showa () { /usr/bin/grep --color=always -i -a1 $@ $DOTFILES/bash/.bash_aliases |
 
 #   WebDeb
 #   ------------------------------------------------------------
-alias gimmeServer='python -m SimpleHTTPServer'
-
+alias gimmeServer='python -m http.server 8000'
 
 # Reference https://gist.github.com/natelandau/10654137

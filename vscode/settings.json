@@ -49,6 +49,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "[go]": {
     "editor.formatOnSave": true
   },
@@ -59,11 +63,11 @@
     "editor.formatOnSave": false
   },
   "[markdown]": {
-    "editor.formatOnSave": true
+    // "editor.formatOnSave": true
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.formatOnSave": true,
+  // "editor.formatOnSave": true,
   "go.formatTool": "goimports",
   "go.lintOnSave": "package",
   "workbench.editorAssociations": {
@@ -87,5 +91,14 @@
   "editor.accessibilitySupport": "off",
   "[python]": {
     "editor.formatOnType": true
+  },
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "hediet.vscode-drawio.resizeImages": null,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
   }
 }
