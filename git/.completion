@@ -18,15 +18,15 @@ fi
 
 # When in Zsh
 if [ -f ~/.zshrc ]; then
-    zstyle ':completion:*:*:git:*' script $DOTFILES/git/.git-completion.bash
+    zstyle ':completion:*:*:git:*' script $DOTFILES/git/.git-completion.zsh
     fpath=($DOTFILES/git/ $fpath)
 
     autoload -Uz compinit && compinit
 
     #  Add git completion to aliases
-    __git_complete gs git status -s
-    __git_complete gb git branch
-    __git_complete gt git checkout
-    __git_complete gd git diff
-    __git_complete gc git commit
+    # __git_complete gs git status -s
+    # __git_complete gb git branch
+    # __git_complete gt git checkout
+    # __git_complete gd git diff
+    # __git_complete gc git commit
 fi
