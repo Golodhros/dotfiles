@@ -11,6 +11,9 @@ if [ -f $DOTFILES/bash/.bashrc ]; then
 fi
 
 #   Load Git stuff
+if [ -f $DOTFILES/git/.config ]; then
+   source $DOTFILES/git/.config
+fi
 if [ -f $DOTFILES/git/.aliases ]; then
    source $DOTFILES/git/.aliases
 fi
