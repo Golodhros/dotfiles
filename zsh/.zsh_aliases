@@ -38,10 +38,22 @@ alias weather="curl -4 http://wttr.in"
 
 #   showa: to remind yourself of an alias (given some part of it)
 #   ------------------------------------------------------------
-showa () { /usr/bin/grep --color=always -i -a1 $@ $DOTFILES/bash/.bash_aliases | grep -v '^\s*$' | less -FSRXc ; }
+showa () { /usr/bin/grep --color=always -i -a1 $@ $DOTFILES/zsh/.zsh_aliases | grep -v '^\s*$' | less -FSRXc ; }
 
 #   WebDeb
 #   ------------------------------------------------------------
 alias gimmeServer='python -m http.server 8000'
 
 # Reference https://gist.github.com/natelandau/10654137
+
+
+# Lock the screen (when going AFK)
+# Reference: https://apple.stackexchange.com/questions/406616/replacement-for-cgsession-suspend
+alias afk="zsh $DOTFILES/osx/lockscreen.sh"
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+# Show/hide hidden files in Finder
+alias showHidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hideHidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"

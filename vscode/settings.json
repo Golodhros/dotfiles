@@ -4,7 +4,10 @@
     "source.fixAll.eslint": true
     // "source.removeUnusedImports": true
   },
+  // "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
   "editor.formatOnPaste": true,
+  "editor.inlineSuggest.enabled": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -65,16 +68,18 @@
   "[markdown]": {
     // "editor.formatOnSave": true
   },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  // "editor.formatOnSave": true,
-  "go.formatTool": "goimports",
-  "go.lintOnSave": "package",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
   "trailing-spaces.trimOnSave": true,
-  "go.toolsManagement.autoUpdate": true,
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
@@ -85,20 +90,13 @@
     ".env*": "makefile"
   },
   "files.insertFinalNewline": true,
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.accessibilitySupport": "off",
-  "[python]": {
-    "editor.formatOnType": true
-  },
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  "hediet.vscode-drawio.resizeImages": null,
-  "editor.inlineSuggest.enabled": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false
-  }
+  },
+  "workbench.iconTheme": "seti",
+  "window.zoomLevel": 1
 }

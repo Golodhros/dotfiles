@@ -31,7 +31,33 @@ Feel free to explore, learn and copy parts for your own dotfiles.
 1. Copy and paste `.dotfiles_env` and `.bash_profile` (`.zsh_profile`) or into your home folder (lookout with rewriting yours)
 1. Run `install.sh` to start the installation
 
-Install Oh My Zsh
+## VSCode installation
+1. Install VSCode from [this link](https://code.visualstudio.com/docs?dv=osx).
+1. Set it up to launch from the command line: Open the Command Palette (Cmd+Shift+P) and type 'shell command' to find the Shell Command: Install 'code' command in PATH command.
+1. Add the following extensions as needed:
+- EditorConfig
+- EsLint
+- Prettier
+- Go
+- SASS
+- SCSS IntelliSense
+- Seti-icons
+- Stylelint
+- Sublime Text Keymap
+- Trailing Spaces
+- YAML Sort
+- MDX
+- GraphQL
+- Import Cost
+- Open in GitHub
+- Duplicate action
+- Remote - Containers
+- Remote - Development
+- VSCode React Refactor?
+- Monokai Seti
+- Github Copilot
+1. Follow the configuration instruction on .dotfiles/vscode/instructions.txt
+
 
 ## Thanks To:
 
