@@ -1,9 +1,9 @@
 # Create symbolic links to VSCode settings file directory
 All that we need is in the correct location now, time to create symlinks to those files.
 
-ln -s /Users/<userFolder>/.dotfiles/vscode/settings.json /Users/<userFolder>/Library/Application\ Support/Code/User/settings.json
-ln -s /Users/marcosiglesias/.dotfiles/vscode/keybindings.json /Users/marcosiglesias/Library/Application\ Support/Code/User/keybindings.json
-ln -s /Users/marcosiglesias/.dotfiles/vscode/snippets/ /Users/marcosiglesias/Library/Application\ Support/Code/User
+ln -s /Users/miglesias/.dotfiles/vscode/settings.json /Users/miglesias/Library/Application\ Support/Code/User/settings.json
+ln -s /Users/miglesias/.dotfiles/vscode/keybindings.json /Users/miglesias/Library/Application\ Support/Code/User/keybindings.json
+ln -s /Users/miglesias/.dotfiles/vscode/snippets/ /Users/miglesias/Library/Application\ Support/Code/User
 
 
 Reference:
