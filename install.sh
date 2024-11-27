@@ -6,7 +6,7 @@ echo "Setting up your Mac..."
 source ~/.dotfiles/.dotfiles_env
 
 # Install dotfiles on a fresh system
-source $DOTFILES/bin/install.sh
+# source $DOTFILES/bin/install.sh
 # source $DOTFILES/homebrew/install.sh
 # source $DOTFILES/osx/install.sh
 # source $DOTFILES/fonts/install.sh
