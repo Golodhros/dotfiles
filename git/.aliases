@@ -5,12 +5,15 @@ alias gt="git checkout "
 alias gd="git diff"
 alias gc="git commit"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cg  reen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias glme="git log --author='Marcos Iglesias'"
 alias ga="git commit --amend --no-edit"
 
 alias gri="git rebase -i HEAD~10" #10 is an arbitrary number, by tastes
 alias gpr="git pull --rebase origin master"
+alias gpm="git pull --rebase origin main"
 alias gpu="git pull --rebase upstream master"
 alias garc="git add . && git rebase --continue"
+alias gacpc="git add . && git cherry-pick --continue"
 
 alias got="git "
 alias get="git "
