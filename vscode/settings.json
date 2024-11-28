@@ -1,10 +1,9 @@
 {
   "editor.fontLigatures": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-    // "source.removeUnusedImports": true
+    "source.fixAll.eslint": "explicit"
   },
-  // "editor.formatOnSave": true,
+  "editor.formatOnSave": true,
   "editor.accessibilitySupport": "off",
   "editor.formatOnPaste": true,
   "editor.inlineSuggest.enabled": true,
@@ -16,18 +15,16 @@
   ],
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "eslint.options": {},
-  "workbench.colorTheme": "Monokai Seti",
+  "workbench.colorTheme": "Monokai Seti Dark",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "workbench.colorCustomizations": {
-    "[Monokai Seti]": {
-      "editor.findMatchHighlightBackground": "#ff00c3a7",
-      "editor.selectionBackground": "#e37933",
-      "editor.selectionHighlightBackground": "#f55385",
-      "editor.findMatchBackground": "#e37933"
-    }
+    "editor.findMatchHighlightBackground": "#ff00c3a7", //Other SEARCH MATCHES
+    "editor.selectionBackground": "#e37933",
+    "editor.selectionHighlightBackground": "#f55385",
+    "editor.findMatchBackground": "#e37933" //Current SEARCH MATCH
   },
-  "workbench.editor.showTabs": true,
+  "workbench.editor.showTabs": "multiple",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
@@ -66,7 +63,7 @@
     "editor.formatOnSave": false
   },
   "[markdown]": {
-    // "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -98,5 +95,19 @@
     "scminput": false
   },
   "workbench.iconTheme": "seti",
-  "window.zoomLevel": 1
+  "openInGitHub.defaultBranch": "master",
+  "openInGitHub.defaultRemote": "origin",
+  // Playwright
+  "playwright.reuseBrowser": true,
+  "playwright.env": {
+    "TESTING_DOMAIN": "http://localhost:3000"
+  },
+  "window.zoomLevel": 1,
+  "git.openRepositoryInParentFolders": "never",
+  "colorize.languages": ["javascript", "typescript", "typescriptreact"],
+  "gitlens.advanced.messages": {
+    "suppressRebaseSwitchToTextWarning": true
+  },
+  "prisma.showPrismaDataPlatformNotification": false,
+  "github.copilot.editor.enableAutoCompletions": true
 }
