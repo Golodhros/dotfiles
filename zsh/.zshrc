@@ -33,9 +33,11 @@ export EDITOR="code -w"
 source $HOME/.local/bin/bashmarks.sh
 
 #   Set the title of a terminal window or tab to match the folder
-precmd() {
+autoload -U add-zsh-hook
+set_terminal_title() {
   print -Pn "\e]0;@ %~/\a"
 #   print -Pn "\e]0;%n@%m: %~/\a"
 }
+add-zsh-hook precmd set_terminal_title
 
 # Reference https://gist.github.com/natelandau/10654137
