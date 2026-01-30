@@ -1,27 +1,19 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
   {
-    "key": "alt+space",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    "key": "ctrl+l",
+    "command": "aichat.newchataction"
   },
   {
-    "key": "ctrl+space",
-    "command": "-editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    "key": "cmd+l",
+    "command": "expandLineSelection"
   },
   {
-    "key": "alt+space",
-    "command": "toggleSuggestionDetails",
-    "when": "suggestWidgetVisible && textInputFocus"
+    "key": "cmd+k cmd+w",
+    "command": "workbench.action.closeAllEditors"
   },
   {
-    "key": "ctrl+space",
-    "command": "-toggleSuggestionDetails",
-    "when": "suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "cmd+m cmd+w",
-    "command": "editor.emmet.action.wrapWithAbbreviation"
+    "key": "cmd+i",
+    "command": "composerMode.agent"
   }
 ]
