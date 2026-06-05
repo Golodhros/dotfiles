@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Backups created by install.sh / manual edits
+*.bak
+*.backup
+
+# Per-machine git identity (created from git/gitconfig.local.example)
+.gitconfig.local
+
+# Local-only / secret shell config (never commit)
+.extra
+.extra.local

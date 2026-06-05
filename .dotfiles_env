@@ -1,3 +1,0 @@
-# Paths
-export DOTFILES="$HOME/.dotfiles"
-export MACOSX_LIBRARY="$HOME/Library"

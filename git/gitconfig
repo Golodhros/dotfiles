@@ -1,0 +1,15 @@
+# Tracked git config — symlinked to ~/.gitconfig by install.sh.
+# Identity (name/email) is NOT here on purpose; it lives in the untracked
+# ~/.gitconfig.local (see git/gitconfig.local.example), so this file is safe
+# to keep in a public repo and reuse across machines.
+[include]
+	path = ~/.gitconfig.local
+
+[pull]
+	rebase = true
+
+[submodule]
+	recurse = true
+
+[core]
+	editor = cursor -w
