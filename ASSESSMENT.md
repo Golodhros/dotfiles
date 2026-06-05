@@ -1,9 +1,29 @@
 # Dotfiles Assessment & Improvement Roadmap
 
-_Last reviewed: 2026-06-04_
+_Last reviewed: 2026-06-04 · Updated: 2026-06-05_
 
 Goal driving this assessment: **(1)** stand up a new dev machine quickly and repeatably,
 and **(2)** keep a clean separation between Puzzle (work) and personal concerns.
+
+## Update (2026-06-05): what was implemented
+
+On branch `chore/reproducible-personal-setup`:
+
+- ✅ **Removed the Oh My Zsh patch.** `zsh/.zsh_*` renamed to `*.zsh`; restored the default
+  `oh-my-zsh.sh` glob. Survives `omz update` now.
+- ✅ **Cursor as default editor** (`EDITOR` + `git core.editor`). NVM auto-`.nvmrc`
+  switching moved into the repo (idempotent, won't double-run when `~/.extra` also has it).
+- ✅ **Tracked the real state:** added `.zshrc`, `.zprofile` (single `brew shellenv`),
+  and `git/gitconfig` + `git/gitconfig.local.example` (identity via `[include]`).
+- ✅ **Real `install.sh` + `Brewfile`** — one-command idempotent bootstrap with backups.
+- ✅ **Work/personal boundary** documented; repo is personal-only, `~/.extra` is the
+  opt-in work seam.
+- ✅ **Cleanup:** removed `sublime/` (~20 MB), deduped `.dotfiles_env`, added `.gitignore`.
+  Kept `bash/` (non-zsh machines) and `hyper/` (Windows) per request.
+
+**Intentionally deferred:** the secrets hardening (issue #1) — `~/.extra` stays a manual,
+1Password-restored file. **Not done in this pass:** Windows automation (Mac-only by
+choice). Remaining optional ideas are in the roadmap below.
 
 ## Executive Summary
 
