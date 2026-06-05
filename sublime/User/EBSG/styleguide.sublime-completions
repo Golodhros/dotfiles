@@ -1,8 +1,0 @@
-{
-    "scope": "text.scss",
-
-    "completions": [
-        { "trigger": "monster", "contents": "cuack!!" },
-        { "trigger": "ebmar", "contents": "l-mar-" }
-    ]
-}

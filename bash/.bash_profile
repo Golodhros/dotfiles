@@ -1,8 +1,8 @@
 #   Uses my dotfiles to load stuff
 
-#   Load environment variables too
-if [ -f ~/.dotfiles_env ]; then
-   source ~/.dotfiles_env
+#   Load environment variables too (single canonical file, shared with zsh)
+if [ -f ~/.zshenv ]; then
+   source ~/.zshenv
 fi
 
 #   Load bash
