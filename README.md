@@ -67,6 +67,7 @@ Shell is **zsh + Oh My Zsh**. Config loads in this order:
 | `git/` | `gitconfig` (+ `gitconfig.local.example`), shell aliases/pager/completion |
 | `osx/` | `set-defaults.sh` (macOS defaults), `lockscreen.sh` (`afk`) |
 | `bin/` | `get_song.sh` (yt-dlp), `save_vscode_extensions.sh` |
+| `ai/` | Genericized personal AI dev skills & agents for Claude Code; `ai/link.sh` symlinks them into a project's `.claude/` (see `ai/README.md`) |
 | `vscode/` | Editor settings/keybindings/extension lists (used by Cursor too) |
 | `powerline-shell/` | Powerline Shell segments config + symlink notes |
 | `iterm2/` | iTerm2 plist + history snippet (macOS terminal) |
