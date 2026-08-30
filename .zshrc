@@ -22,3 +22,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Make user-local binaries (bashmarks, pipx, etc.) available.
 export PATH="$HOME/.local/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/miglesias/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
