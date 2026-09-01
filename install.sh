@@ -58,13 +58,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-# --- 5. NVM ------------------------------------------------------------------
-if [ ! -d "$HOME/.nvm" ]; then
-  info "Installing NVM..."
-  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-fi
-
-# --- 6. Bashmarks ------------------------------------------------------------
+# --- 5. Bashmarks ------------------------------------------------------------
 if [ ! -f "$HOME/.local/bin/bashmarks.sh" ]; then
   info "Installing Bashmarks..."
   tmp="$(mktemp -d)"
@@ -73,14 +67,14 @@ if [ ! -f "$HOME/.local/bin/bashmarks.sh" ]; then
   rm -rf "$tmp"
 fi
 
-# --- 7. Powerline Shell ------------------------------------------------------
+# --- 6. Powerline Shell ------------------------------------------------------
 if ! command -v powerline-shell >/dev/null 2>&1; then
   info "Installing Powerline Shell (via pipx)..."
   command -v pipx >/dev/null 2>&1 || brew install pipx
   pipx install powerline-shell
 fi
 
-# --- 8. Symlink dotfiles -----------------------------------------------------
+# --- 7. Symlink dotfiles -----------------------------------------------------
 info "Linking dotfiles..."
 link "$DOTFILES/.zshenv"          "$HOME/.zshenv"
 link "$DOTFILES/.zshrc"           "$HOME/.zshrc"
@@ -95,13 +89,13 @@ if [ -d "$HOME/Library/Application Support/Cursor" ]; then
   link "$DOTFILES/vscode/keybindings.json" "$CURSOR_USER/keybindings.json"
 fi
 
-# --- 9. Git identity (untracked, per-machine) --------------------------------
+# --- 8. Git identity (untracked, per-machine) --------------------------------
 if [ ! -f "$HOME/.gitconfig.local" ]; then
   info "Creating ~/.gitconfig.local from example (edit name/email if needed)..."
   cp "$DOTFILES/git/gitconfig.local.example" "$HOME/.gitconfig.local"
 fi
 
-# --- 10. macOS defaults (optional) -------------------------------------------
+# --- 9. macOS defaults (optional) -------------------------------------------
 read -r -p "Apply macOS defaults (osx/set-defaults.sh)? [y/N] " reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
   sh "$DOTFILES/osx/set-defaults.sh"
@@ -111,3 +105,4 @@ fi
 ok "Personal setup complete. Open a new terminal."
 warn "Puzzle (work) config is NOT installed by this script."
 warn "On a work machine, restore ~/.extra (secrets via 1Password) — see README.md."
+warn "No Node version manager is installed here; ~/.extra sets up fnm on work machines."

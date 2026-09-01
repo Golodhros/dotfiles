@@ -12,39 +12,10 @@
 #   1.  ENVIRONMENT CONFIGURATION
 #   -------------------------------
 
-#   Set Paths
+#   Node
 #   ------------------------------------------------------------
-
-#   NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"             # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-#   Automatically switch Node version when entering a dir with an .nvmrc
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-# Skip if something else (e.g. a work ~/.extra) already registered this hook,
-# so we don't switch Node versions — or print — twice on shell startup.
-if command -v nvm >/dev/null 2>&1 && [[ -z ${chpwd_functions[(r)load-nvmrc]} ]]; then
-  add-zsh-hook chpwd load-nvmrc
-  load-nvmrc
-fi
-
+#   No Node version manager is configured here — it's machine-specific.
+#   Work machines load fnm (with --use-on-cd auto-switching) from ~/.extra.
 
 #   Set Default Editor
 #   ------------------------------------------------------------

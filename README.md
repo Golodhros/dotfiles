@@ -15,7 +15,7 @@ git clone git@github.com:Golodhros/dotfiles.git ~/.dotfiles
 
 1. Checks for Xcode Command Line Tools.
 2. Installs **Homebrew** if missing, then runs `brew bundle` (see `Brewfile`).
-3. Installs **Oh My Zsh**, **NVM**, **Bashmarks**, and **Powerline Shell** if missing.
+3. Installs **Oh My Zsh**, **Bashmarks**, and **Powerline Shell** if missing.
 4. Symlinks the tracked dotfiles into `~` (`.zshenv`, `.zshrc`, `.zprofile`,
    `git/gitconfig` → `~/.gitconfig`, Powerline config, Cursor settings).
 5. Creates `~/.gitconfig.local` from the example (your git identity).
@@ -37,8 +37,7 @@ Shell is **zsh + Oh My Zsh**. Config loads in this order:
    - `zsh/aliases.zsh` — file/find/finder/misc aliases, `afk`, `gimmeServer`, `showa`…
    - `zsh/profile.zsh` — sources `git/.config`, `git/.aliases`, `git/.completion`, then `~/.extra`.
    - `zsh/prompt.zsh` — Powerline Shell prompt.
-   - `zsh/shell.zsh` — NVM (+ auto-`.nvmrc` switching), `EDITOR=cursor -w`, Bashmarks,
-     terminal-title hook.
+   - `zsh/shell.zsh` — `EDITOR=cursor -w`, Bashmarks, terminal-title hook.
 5. **`~/.extra`** — machine-specific / work config, sourced last (see below). Not tracked.
 
 > Files in `zsh/` are named `*.zsh` so Oh My Zsh loads them natively. Don't rename them
@@ -53,6 +52,10 @@ Shell is **zsh + Oh My Zsh**. Config loads in this order:
 - **Puzzle (work) config lives only in `~/.extra`**, which is git-ignored and sourced
   conditionally from `zsh/profile.zsh` (`[ -f ~/.extra ] && source ~/.extra`). It holds
   work env vars, secrets, gcloud, Cloud SQL proxy aliases, devenv aliases, etc.
+- **The Node version manager is machine-specific too**, so this repo configures none.
+  `~/.extra` sets up [`fnm`](https://github.com/Schniz/fnm) (`brew install fnm`) with
+  `--use-on-cd`, which auto-switches on `.nvmrc` / `.node-version` — the same as the old
+  nvm hook, just faster. `Brewfile`'s `node` is only a baseline for shells outside a project.
 - On a **work machine**, restore `~/.extra` yourself (secrets via 1Password). A personal
   machine simply never has the file, so none of the work config loads.
 
@@ -64,20 +67,20 @@ Shell is **zsh + Oh My Zsh**. Config loads in this order:
 | `Brewfile` | Personal Homebrew packages/casks (work packages in a commented section) |
 | `.zshenv` / `.zshrc` / `.zprofile` | Tracked home shell files, symlinked by `install.sh` |
 | `zsh/` | `aliases.zsh`, `prompt.zsh`, `profile.zsh`, `shell.zsh` (loaded by Oh My Zsh) |
-| `git/` | `gitconfig` (+ `gitconfig.local.example`), shell aliases/pager/completion |
+| `git/` | `gitconfig` (+ `gitconfig.local.example`), shell aliases/pager |
 | `osx/` | `set-defaults.sh` (macOS defaults), `lockscreen.sh` (`afk`) |
 | `bin/` | `get_song.sh` (yt-dlp), `save_vscode_extensions.sh` |
 | `ai/` | Genericized personal AI dev skills & agents for Claude Code; `ai/link.sh` symlinks them into a project's `.claude/` (see `ai/README.md`) |
 | `vscode/` | Editor settings/keybindings/extension lists (used by Cursor too) |
 | `powerline-shell/` | Powerline Shell segments config + symlink notes |
 | `iterm2/` | iTerm2 plist + history snippet (macOS terminal) |
-| `bash/` | bash rc/aliases/prompt/profile — for non-zsh machines (Linux / Git Bash) |
 | `hyper/` | Hyper terminal config — for **Windows** machines without iTerm2 |
 
 ## Windows machines
 
-Windows setup is **manual** (`install.sh` is macOS/bash only). Use the `hyper/.hyper`
-config and the `bash/` files as a reference, and copy what you need by hand.
+Windows setup is **manual** (`install.sh` is macOS-only). Use the `hyper/.hyper` config
+as a reference and copy what you need by hand. There is no bash config in this repo —
+zsh only.
 
 ## Editor
 

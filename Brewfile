@@ -10,7 +10,7 @@ tap "peonping/tap"
 # --- CLI tools ---
 brew "git"          # newer git than the system one
 brew "gh"           # GitHub CLI
-brew "node"         # baseline Node (per-project versions handled by nvm)
+brew "node"         # baseline Node (per-project versions come from ~/.extra, e.g. fnm)
 brew "yt-dlp"       # used by bin/get_song.sh
 brew "graphviz"     # diagrams / dot
 brew "peon-ping"    # peon trainer
@@ -21,7 +21,7 @@ cask "iterm2"       # terminal (macOS)
 cask "hiddenbar"    # menu-bar declutter
 cask "font-meslo-lg-nerd-font"  # Powerline/Nerd font for the prompt
 
-# Note: Powerline Shell, NVM and Bashmarks are NOT installed via brew —
+# Note: Powerline Shell and Bashmarks are NOT installed via brew —
 # install.sh sets them up (pipx / official installer / git clone).
 
 # ----------------------------------------------------------------------------

@@ -1,9 +1,39 @@
 # Dotfiles Assessment & Improvement Roadmap
 
-_Last reviewed: 2026-06-04 · Updated: 2026-06-05_
+_Last reviewed: 2026-06-04 · Updated: 2026-09-01_
 
 Goal driving this assessment: **(1)** stand up a new dev machine quickly and repeatably,
 and **(2)** keep a clean separation between Puzzle (work) and personal concerns.
+
+## Update (2026-09-01): fnm replaces NVM, and the repo goes zsh-only
+
+Work is now at **accrual**, which standardises on [`fnm`](https://github.com/Schniz/fnm)
+rather than NVM. A version manager is a per-machine choice, so it no longer lives in the
+repo at all — the repo is version-manager-agnostic and `~/.extra` picks one.
+
+- ✅ **NVM removed from the repo.** Dropped the `NVM_DIR` load and the hand-rolled
+  `load-nvmrc` chpwd hook from `zsh/shell.zsh`, and the "Installing NVM" step from
+  `install.sh` (later steps renumbered 6–10 → 5–9). `Brewfile` and `README.md` updated.
+- ✅ **fnm set up in `~/.extra`** (untracked):
+  `eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"`.
+  `--use-on-cd` replaces the hand-rolled hook; `--version-file-strategy=recursive` finds a
+  `.nvmrc` / `.node-version` in parent directories, so it works from any package inside a
+  monorepo. Both accrual repos pin `v24.20.0` via `.node-version`; that version is
+  installed and set as the fnm default.
+  - ⚠️ **Gotcha worth remembering:** with the Homebrew install, `FNM_DIR` defaults to
+    `~/.local/share/fnm`, *not* the `~/Library/Application Support/fnm` path fnm's
+    curl-installer docs use. Don't put that path on `PATH` and don't override `FNM_DIR` —
+    installing a Node version under the wrong root makes `use-on-cd` fail at runtime with
+    "Requested version v24.20.0 is not currently installed".
+- ✅ **`bash/` deleted** — zsh-only now, no going back. Every alias and function in
+  `bash/.bash_aliases` already existed in `zsh/aliases.zsh`, so nothing was lost.
+  Resolves the `bash/` half of issue 7.
+- ✅ **Vendored git completion deleted — this *fixed* `git <TAB>`, which was broken.**
+  Removed `git/.git-completion.bash` (78K), `git/.git-completion.zsh` (7K),
+  `git/.completion`, and its `source` line in `zsh/profile.zsh`.
+
+Verified in a clean login shell: `node` resolves through fnm to v24.20.0 both at `$HOME`
+and inside a repo pinned by `.node-version`.
 
 ## Update (2026-06-05): what was implemented
 
@@ -20,6 +50,7 @@ On branch `chore/reproducible-personal-setup`:
   opt-in work seam.
 - ✅ **Cleanup:** removed `sublime/` (~20 MB), deduped `.dotfiles_env`, added `.gitignore`.
   Kept `bash/` (non-zsh machines) and `hyper/` (Windows) per request.
+  _(`bash/` was subsequently deleted on 2026-09-01.)_
 
 **Intentionally deferred:** the secrets hardening (issue #1) — `~/.extra` stays a manual,
 1Password-restored file. **Not done in this pass:** Windows automation (Mac-only by
@@ -27,16 +58,19 @@ choice). Remaining optional ideas are in the roadmap below.
 
 ## Executive Summary
 
-The repo works on the current machine but is a **manual reference, not an installer**.
-Bootstrapping a new machine today means ~9 hand-done steps including a fragile patch to
-Oh My Zsh's own source and hand-recreating `~/.extra` with secrets that exist nowhere but
-this laptop. There is meaningful drift (the real `~/.zshrc` and `~/.gitconfig` aren't
-tracked), several layers of duplication, and a chunk of dead weight (bash, Hyper,
-Sublime). Puzzle and personal config are tangled together inside a single untracked
-`~/.extra`.
+_Rewritten 2026-09-01. The original June assessment survives in the dated Update sections
+above; the issue list below is annotated with what has since been fixed._
 
-The good news: the bones are fine. A modest, focused cleanup gets you to a
-"clone + one command" bootstrap with a clear work/personal boundary.
+The repo is an **installer now, not a manual reference**: `git clone && ./install.sh` takes
+a new Mac to a working shell, the real `~/.zshrc` / `~/.zprofile` / `~/.gitconfig` are
+tracked, and the Oh My Zsh source patch is gone. Dead weight (`sublime/`, then `bash/`) has
+been removed and the shell story is zsh-only.
+
+What's left is the boundary, not the bootstrap. `~/.extra` is still a single untracked
+plaintext file holding live credentials with no restore path — the one genuinely
+high-severity item, and still deferred. Issue 3 (work and personal tangled in that one
+file) is the other open structural item; anything machine-specific belongs there rather
+than in a tracked file.
 
 ---
 
@@ -45,7 +79,8 @@ The good news: the bones are fine. A modest, focused cleanup gets you to a
 - **Clear modular split** of concerns into `zsh/`, `git/`, `osx/`, etc.
 - **`~/.extra` seam** for machine-specific config is the right idea — secrets and
   work config are kept *out* of the committed repo.
-- **NVM auto-`.nvmrc`** switching, useful git aliases, sensible macOS defaults.
+- **Automatic per-project Node switching** (NVM then, fnm via `~/.extra` now), useful
+  git aliases, sensible macOS defaults.
 - **`DOTFILES` env var** indirection makes paths portable.
 
 ---
@@ -54,17 +89,7 @@ The good news: the bones are fine. A modest, focused cleanup gets you to a
 
 ### 🔴 High
 
-1. **Plaintext secrets with no restore path.** `~/.extra` holds live credentials
-   (GitHub PAT, CircleCI token, Bugsnag tokens, a Lighthouse password). They are not in
-   git (good) but they live only on this disk in plaintext. On a new machine they're
-   gone, and on this machine any process/backup can read them.
-   - **Rotate** the GitHub PAT and any token that has ever been pasted/shared — treat
-     them as potentially exposed.
-   - Move secrets to **1Password** (already referenced in `~/.extra` comments) and load
-     them via `op read`/`op run`, or at minimum source a git-ignored `~/.extra.secrets`
-     that's documented and restorable.
-
-2. **Fragile Oh My Zsh source patch.** Setup requires editing
+1. ~~**Fragile Oh My Zsh source patch.**~~ ✅ **Resolved 2026-06-05.** Setup requires editing
    `~/.oh-my-zsh/oh-my-zsh.sh` (the `for config_file ("$ZSH_CUSTOM"/.*)` line). Any
    `omz update` reverts it, silently disabling all `zsh/` config. This is also the
    single most confusing part of a fresh setup.
@@ -74,7 +99,7 @@ The good news: the bones are fine. A modest, focused cleanup gets you to a
 
 ### 🟠 Medium
 
-3. **Repo is not an installer; real config has drifted.** `install.sh` is almost
+2. ~~**Repo is not an installer; real config has drifted.**~~ ✅ **Resolved 2026-06-05.** `install.sh` is almost
    entirely commented out (only runs `osx/set-defaults.sh`). The actually-loaded
    `~/.zshrc` and `~/.zprofile` and `~/.gitconfig` are **not tracked**, so the repo
    doesn't capture the real state. New-machine setup is 100% manual.
@@ -82,35 +107,30 @@ The good news: the bones are fine. A modest, focused cleanup gets you to a
      [Dotbot](https://github.com/anishathalye/dotbot)) that symlinks tracked files and a
      `Brewfile` (`brew bundle`) that installs tooling.
 
-4. **Work/personal not actually separated.** Everything — personal tooling *and* Puzzle
+3. **Work/personal not actually separated.** Everything — personal tooling *and* Work
    secrets/aliases — is jammed into one untracked `~/.extra`. There's no boundary.
    - **Fix:** split into layered, explicit files (see "Proposed Architecture").
 
-5. **Duplication across files.** Same logic defined in multiple places:
+4. **Duplication across files.** Same logic defined in multiple places:
    - Powerline prompt hook: `zsh/.zsh_prompt` **and** `~/.extra`.
-   - NVM load: `zsh/.zshrc`, `~/.extra`, **and** `bash/.bashrc`.
+   - NVM load: `zsh/.zshrc`, `~/.extra`, **and** `bash/.bashrc`. — ✅ resolved 2026-09-01;
+     the repo now defines no version manager, only `~/.extra` does.
    - Bashmarks: `zsh/.zshrc` **and** `~/.extra`.
-   - Homebrew `shellenv`: `~/.zprofile` (×5!) **and** `~/.extra`.
+   - Homebrew `shellenv`: `~/.zprofile` (×5!) **and** `~/.extra`. — ✅ resolved; `~/.zprofile`
+     defines it once and `.zshrc` only fills in for non-login shells (2026-09-01).
    - `~/.zprofile` literally repeats `eval "$(brew shellenv)"` five times.
    - `zsh/.zsh_aliases` defines `alias path=...` twice and `~/.extra` has the
      `unsetopt inc_append_history`/`share_history` block twice.
    - **Fix:** single source of truth per concern; delete the copies.
 
-6. **Editor inconsistency.** `~/.gitconfig` uses `cursor -w`; shell `EDITOR` is
-   `code -w`. Pick one (likely Cursor) and set it once.
-
 ### 🟡 Low / hygiene
 
-7. **Dead weight inflating the repo and setup:**
-   - `bash/` — machine uses zsh.
-   - `hyper/` — machine uses iTerm2.
+5. **Dead weight inflating the repo and setup:**
    - `sublime/` — large, includes bundled binaries (`ColorPicker_*`), theme packs, an
      `.SublimeREPLHistory/`, and a committed `.DS_Store`. Almost certainly unused now.
    - **Fix:** delete or move to an `archive/` branch/dir.
-8. **`.zshenv` and `.dotfiles_env` are byte-identical** — keep one.
-9. **No `.gitignore`** (e.g. for `.DS_Store`, `*.backup`, `extra.secrets`).
-10. **README was stale** — now rewritten to match reality; this file holds the roadmap.
-11. **Hardcoded absolute paths** (`/Users/miglesias/...`) in `vscode/instructions.txt`
+6. **`.zshenv` and `.dotfiles_env` are byte-identical** — keep one.
+7. **Hardcoded absolute paths** (`/Users/miglesias/...`) in `vscode/instructions.txt`
     and `~/.extra` reduce portability across machines/usernames.
 
 ---
@@ -128,13 +148,13 @@ zsh/profile.zsh           → loads git/*, then ~/.config/dotfiles/personal.sh, 
 git/base.gitconfig        → tracked aliases/pager (no identity)
 ~/.gitconfig.local        → identity + editor (untracked, per-machine)
 
-~/.config/dotfiles/personal.sh   → personal tooling (nvm, bashmarks, powerline)  [untracked or tracked-no-secrets]
-~/.config/dotfiles/work.sh       → Puzzle aliases + non-secret config            [untracked]
-~/.config/dotfiles/work.secrets  → Puzzle secrets, sourced from 1Password        [untracked, never committed]
+~/.config/dotfiles/personal.sh   → personal tooling (bashmarks, powerline; Node manager per machine)
+~/.config/dotfiles/work.sh       → Work aliases + non-secret config            [untracked]
+~/.config/dotfiles/work.secrets  → Work secrets, sourced from 1Password        [untracked, never committed]
 extra.example                    → committed template documenting every var above
 ```
 
-Conditional work loading (so a personal machine never tries to load Puzzle config):
+Conditional work loading (so a personal machine never tries to load Work config):
 
 ```zsh
 # in profile.zsh
@@ -153,8 +173,6 @@ machine is reproducible.
 
 ## Roadmap (suggested order)
 
-1. **Security first:** rotate exposed tokens; move secrets to 1Password; add
-   `extra.example`. _(High value, low effort.)_
 2. **Kill the OMZ patch:** rename `zsh/.zsh_*` → `*.zsh`; remove the manual edit; verify
    a fresh shell still loads everything.
 3. **Track real state:** add `~/.zshrc`, `~/.zprofile`, `~/.gitconfig` (split into
@@ -162,11 +180,13 @@ machine is reproducible.
 4. **Make it installable:** add a `Brewfile` + a real `install.sh` (symlink + `brew
    bundle` + macOS defaults). Target: `git clone && ./install.sh`.
 5. **Split work/personal** per the architecture above.
-6. **Prune dead weight:** remove/archive `bash/`, `hyper/`, `sublime/`; add `.gitignore`.
-7. **Optional modernization:** consider [`starship`](https://starship.rs) (faster,
-   actively maintained) over Powerline Shell; consider [`fnm`](https://github.com/Schniz/fnm)
-   over NVM for speed; consider [`chezmoi`](https://www.chezmoi.io) if you want
-   templated, multi-machine, secret-aware management out of the box.
+6. ~~**Prune dead weight:** remove/archive `bash/`; add `.gitignore`.~~ ✅ done
+   (`sublime/` 2026-06-05, `.gitignore` 2026-06-05, `bash/` 2026-09-01).
+7. **Optional modernization:** ✅ `fnm` over NVM — done 2026-09-01, via `~/.extra` rather
+   than the repo (see the update at the top). Still open: consider
+   [`starship`](https://starship.rs) (faster, actively maintained) over Powerline Shell,
+   and [`chezmoi`](https://www.chezmoi.io) if you want templated, multi-machine,
+   secret-aware management out of the box.
 
 Target end state: **clone the repo, run one command, restore secrets from 1Password,
-done** — with a clean, auditable line between Puzzle and personal.
+done** — with a clean, auditable line between Work and personal.
