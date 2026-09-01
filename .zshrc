@@ -18,10 +18,10 @@ ZSH_CUSTOM="$HOME/.dotfiles/zsh"
 # Plugins (keep lean — too many slow down startup).
 # plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
-
 # Make user-local binaries (bashmarks, pipx, etc.) available.
 export PATH="$HOME/.local/bin:$PATH"
+
+source $ZSH/oh-my-zsh.sh
 
 # pnpm
 export PNPM_HOME="/Users/miglesias/Library/pnpm"
