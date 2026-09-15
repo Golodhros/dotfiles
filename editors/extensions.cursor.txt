@@ -1,0 +1,3 @@
+# Cursor-only extensions (Cursor marketplace IDs, or not available in VS Code).
+anysphere.remote-ssh
+kylinideteam.gitlens   # Cursor-marketplace GitLens; VS Code uses eamodio.gitlens

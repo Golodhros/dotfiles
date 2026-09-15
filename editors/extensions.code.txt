@@ -1,0 +1,2 @@
+# VS Code-only extensions (or VS Code IDs for things Cursor ships under another ID).
+eamodio.gitlens        # counterpart of kylinideteam.gitlens in Cursor

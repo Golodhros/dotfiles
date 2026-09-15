@@ -1,4 +1,5 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Shared keybindings for Cursor and VS Code (symlinked into both by install.sh).
+// Bindings for commands that only exist in one editor are ignored by the other.
 [
   {
     "key": "ctrl+l",

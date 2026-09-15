@@ -16,7 +16,8 @@ brew "graphviz"     # diagrams / dot
 brew "peon-ping"    # peon trainer
 
 # --- Apps (casks) ---
-cask "cursor"       # primary editor
+cask "cursor"       # primary editor (config: editors/)
+cask "visual-studio-code"  # secondary editor, shares editors/ config
 cask "iterm2"       # terminal (macOS)
 cask "hiddenbar"    # menu-bar declutter
 cask "font-meslo-lg-nerd-font"  # Powerline/Nerd font for the prompt

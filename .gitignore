@@ -11,3 +11,6 @@
 # Local-only / secret shell config (never commit)
 .extra
 .extra.local
+
+# Scratch dumps from editors/install.sh dump
+editors/extensions.*.raw.txt

@@ -17,7 +17,8 @@ git clone git@github.com:Golodhros/dotfiles.git ~/.dotfiles
 2. Installs **Homebrew** if missing, then runs `brew bundle` (see `Brewfile`).
 3. Installs **Oh My Zsh**, **Bashmarks**, and **Powerline Shell** if missing.
 4. Symlinks the tracked dotfiles into `~` (`.zshenv`, `.zshrc`, `.zprofile`,
-   `git/gitconfig` → `~/.gitconfig`, Powerline config, Cursor settings).
+   `git/gitconfig` → `~/.gitconfig`, Powerline config), then runs `editors/install.sh`
+   to link editor config into Cursor and VS Code and install their extensions.
 5. Creates `~/.gitconfig.local` from the example (your git identity).
 6. Optionally applies macOS defaults (`osx/set-defaults.sh`).
 
@@ -69,9 +70,9 @@ Shell is **zsh + Oh My Zsh**. Config loads in this order:
 | `zsh/` | `aliases.zsh`, `prompt.zsh`, `profile.zsh`, `shell.zsh` (loaded by Oh My Zsh) |
 | `git/` | `gitconfig` (+ `gitconfig.local.example`), shell aliases/pager |
 | `osx/` | `set-defaults.sh` (macOS defaults), `lockscreen.sh` (`afk`) |
-| `bin/` | `get_song.sh` (yt-dlp), `save_vscode_extensions.sh` |
+| `bin/` | `get_song.sh` (yt-dlp) |
 | `ai/` | Genericized personal AI dev skills & agents for Claude Code; `ai/link.sh` symlinks them into a project's `.claude/` (see `ai/README.md`) |
-| `vscode/` | Editor settings/keybindings/extension lists (used by Cursor too) |
+| `editors/` | Shared Cursor + VS Code settings/keybindings/snippets, per-editor extension lists, `install.sh` |
 | `powerline-shell/` | Powerline Shell segments config + symlink notes |
 | `iterm2/` | iTerm2 plist + history snippet (macOS terminal) |
 | `hyper/` | Hyper terminal config — for **Windows** machines without iTerm2 |
@@ -85,8 +86,23 @@ zsh only.
 ## Editor
 
 Default editor is **Cursor** (`EDITOR="cursor -w"` and `git core.editor = cursor -w`).
-Settings/keybindings under `vscode/` are symlinked into Cursor by `install.sh`. Refresh the
-extension list with `bin/save_vscode_extensions.sh`.
+Both Cursor and VS Code are installed from the Brewfile and configured from `editors/`:
+
+- `settings.json`, `keybindings.json` and `snippets/` are **one shared set**, symlinked into
+  `~/Library/Application Support/{Cursor,Code}/User/`. Each editor ignores settings keys and
+  keybinding commands it doesn't know, so editor-specific entries are harmless in the other.
+- Extensions are split by marketplace ID: `extensions.common.txt` (installed in both),
+  `extensions.cursor.txt` and `extensions.code.txt` (editor-specific IDs — e.g. GitLens is
+  `kylinideteam.gitlens` in Cursor's marketplace but `eamodio.gitlens` in VS Code's).
+- `editors/install.sh [all|link|extensions|dump]` — `all` (default) links config and installs
+  extensions for every editor whose `.app` is present; `dump` writes
+  `extensions.<cli>.raw.txt` from each editor so you can diff against the curated lists.
+
+To add an extension: install it in the editor, then add its ID to the right list (run
+`editors/install.sh dump` to see what's installed). The script uses the `cursor` / `code` CLI
+from PATH, falling back to the binary bundled inside each `.app`. `link` also symlinks that
+bundled binary into `~/.local/bin` when the CLI isn't on PATH yet (the Homebrew casks normally
+do this; a manually installed app doesn't), so `code .` / `cursor .` work in a new shell.
 
 ## Maintenance
 

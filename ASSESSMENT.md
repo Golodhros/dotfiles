@@ -130,7 +130,7 @@ than in a tracked file.
      `.SublimeREPLHistory/`, and a committed `.DS_Store`. Almost certainly unused now.
    - **Fix:** delete or move to an `archive/` branch/dir.
 6. **`.zshenv` and `.dotfiles_env` are byte-identical** — keep one.
-7. **Hardcoded absolute paths** (`/Users/miglesias/...`) in `vscode/instructions.txt`
+7. **Hardcoded absolute paths** (`/Users/miglesias/...`) in ~~`vscode/instructions.txt`~~ (removed; see `editors/`)
     and `~/.extra` reduce portability across machines/usernames.
 
 ---

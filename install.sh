@@ -82,12 +82,11 @@ link "$DOTFILES/.zprofile"        "$HOME/.zprofile"
 link "$DOTFILES/git/gitconfig"    "$HOME/.gitconfig"
 link "$DOTFILES/powerline-shell/config.json" "$HOME/.config/powerline-shell/config.json"
 
-# Editor (Cursor) settings, if Cursor is installed.
-CURSOR_USER="$HOME/Library/Application Support/Cursor/User"
-if [ -d "$HOME/Library/Application Support/Cursor" ]; then
-  link "$DOTFILES/vscode/settings.json"    "$CURSOR_USER/settings.json"
-  link "$DOTFILES/vscode/keybindings.json" "$CURSOR_USER/keybindings.json"
-fi
+# --- 7b. Editors (Cursor + VS Code) -----------------------------------------
+# Links the shared settings/keybindings/snippets into every editor that is
+# installed (casks come from the Brewfile) and installs their extensions.
+info "Configuring editors..."
+"$DOTFILES/editors/install.sh"
 
 # --- 8. Git identity (untracked, per-machine) --------------------------------
 if [ ! -f "$HOME/.gitconfig.local" ]; then

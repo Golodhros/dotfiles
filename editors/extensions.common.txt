@@ -1,0 +1,12 @@
+# Extensions installed in BOTH Cursor and VS Code (IDs exist in both marketplaces).
+dbaeumer.vscode-eslint
+editorconfig.editorconfig
+johnpapa.vscode-peacock
+kamikillerto.vscode-colorize
+monokai.theme-monokai-pro-vscode
+mrmlnc.vscode-duplicate
+ms-vscode.sublime-keybindings
+openai.chatgpt
+shardulm94.trailing-spaces
+shd101wyy.markdown-preview-enhanced
+yoavbls.pretty-ts-errors
