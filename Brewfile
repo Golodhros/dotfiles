@@ -24,6 +24,10 @@ cask "font-meslo-lg-nerd-font"  # Powerline/Nerd font for the prompt
 
 # Note: Powerline Shell and Bashmarks are NOT installed via brew —
 # install.sh sets them up (pipx / official installer / git clone).
+#
+# Claude Code and Codex are deliberately NOT here either. Both self-update, so a
+# brew copy drifts out of date and then shadows the live one on PATH. install.sh
+# installs them with their own installers.
 
 # ----------------------------------------------------------------------------
 # Puzzle (work) — uncomment on a work machine only.

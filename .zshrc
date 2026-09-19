@@ -24,10 +24,9 @@ export PATH="$HOME/.local/bin:$PATH"
 source $ZSH/oh-my-zsh.sh
 
 # pnpm
-export PNPM_HOME="/Users/miglesias/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
-export PATH="$HOME/.local/bin:$PATH"

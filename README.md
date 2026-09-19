@@ -16,11 +16,13 @@ git clone git@github.com:Golodhros/dotfiles.git ~/.dotfiles
 1. Checks for Xcode Command Line Tools.
 2. Installs **Homebrew** if missing, then runs `brew bundle` (see `Brewfile`).
 3. Installs **Oh My Zsh**, **Bashmarks**, and **Powerline Shell** if missing.
-4. Symlinks the tracked dotfiles into `~` (`.zshenv`, `.zshrc`, `.zprofile`,
+4. Installs the AI coding CLIs if missing: **Claude Code** (official installer,
+   into `~/.local/bin`) and **Codex** (`npm i -g @openai/codex`).
+5. Symlinks the tracked dotfiles into `~` (`.zshenv`, `.zshrc`, `.zprofile`,
    `git/gitconfig` → `~/.gitconfig`, Powerline config), then runs `editors/install.sh`
    to link editor config into Cursor and VS Code and install their extensions.
-5. Creates `~/.gitconfig.local` from the example (your git identity).
-6. Optionally applies macOS defaults (`osx/set-defaults.sh`).
+6. Creates `~/.gitconfig.local` from the example (your git identity).
+7. Optionally applies macOS defaults (`osx/set-defaults.sh`).
 
 After it finishes, open a new terminal. **Work (Puzzle) setup is intentionally not part
 of this** — see "Work vs Personal" below.
@@ -108,6 +110,9 @@ do this; a manually installed app doesn't), so `code .` / `cursor .` work in a n
 
 - Refresh Homebrew list: `brew bundle dump --file=~/.dotfiles/Brewfile --force`
 - Re-running `install.sh` is safe; it relinks and skips already-installed tools.
+- The AI CLIs self-update, so they are **not** in the `Brewfile` on purpose — a brew
+  copy goes stale and shadows the live one on `PATH`. Update them in place with
+  `claude update` and `npm i -g @openai/codex`.
 - See `ASSESSMENT.md` for the review that produced this structure and the remaining ideas.
 
 ## Thanks To

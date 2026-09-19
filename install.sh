@@ -81,6 +81,30 @@ if ! command -v powerline-shell >/dev/null 2>&1; then
   pipx install powerline-shell
 fi
 
+# --- 6b. AI coding CLIs (Claude Code + Codex) --------------------------------
+# Both ship their own self-updating installers, so they are deliberately NOT in
+# the Brewfile: a brew copy goes stale as the CLI updates itself, and the two
+# end up shadowing each other on PATH. Claude Code lands in ~/.local/bin
+# (already on PATH via .zshrc); Codex is a npm global.
+# Skills and agents for these live in ai/ — see ai/README.md and ai/link.sh.
+if ! command -v claude >/dev/null 2>&1; then
+  info "Installing Claude Code..."
+  curl -fsSL https://claude.ai/install.sh | bash || warn "Claude Code install failed; continuing."
+else
+  ok "Claude Code already installed ($(claude --version 2>/dev/null || echo unknown))"
+fi
+
+if ! command -v codex >/dev/null 2>&1; then
+  if command -v npm >/dev/null 2>&1; then
+    info "Installing Codex..."
+    npm install -g @openai/codex || warn "Codex install failed; continuing."
+  else
+    warn "npm not found (expected from Brewfile's node); skipping Codex."
+  fi
+else
+  ok "Codex already installed ($(codex --version 2>/dev/null || echo unknown))"
+fi
+
 # --- 7. Symlink dotfiles -----------------------------------------------------
 info "Linking dotfiles..."
 link "$DOTFILES/.zshenv"          "$HOME/.zshenv"
