@@ -54,3 +54,6 @@ alias afk="zsh $DOTFILES/osx/lockscreen.sh"
 # Show/hide hidden files in Finder
 alias showHidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hideHidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Drop Oh My Zsh's `l` alias (lib/directories.zsh) — unwanted
+unalias l 2>/dev/null

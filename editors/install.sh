@@ -97,10 +97,11 @@ for entry in "${EDITORS[@]}"; do
     bin="$(cli_path "$cli" "$app")" || { warn "'$cli' CLI not found; skipping extensions"; bin=""; }
   fi
   case "$action" in
-    all)        link_editor "$dir"; link_cli "$cli" "$app"; [ -n "$bin" ] && install_extensions "$cli" "$bin" ;;
+    all)        link_editor "$dir"; link_cli "$cli" "$app"
+                if [ -n "$bin" ]; then install_extensions "$cli" "$bin"; fi ;;
     link)       link_editor "$dir"; link_cli "$cli" "$app" ;;
-    extensions) [ -n "$bin" ] && install_extensions "$cli" "$bin" ;;
-    dump)       [ -n "$bin" ] && dump_extensions "$cli" "$bin" ;;
+    extensions) if [ -n "$bin" ]; then install_extensions "$cli" "$bin"; fi ;;
+    dump)       if [ -n "$bin" ]; then dump_extensions "$cli" "$bin"; fi ;;
     *) echo "Usage: $0 [all|link|extensions|dump]"; exit 1 ;;
   esac
 done

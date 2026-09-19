@@ -46,9 +46,16 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 # --- 3. Homebrew bundle ------------------------------------------------------
+brew_failed=0
 if [ -f "$DOTFILES/Brewfile" ]; then
   info "Installing Homebrew packages (brew bundle)..."
-  brew bundle --file="$DOTFILES/Brewfile"
+  # --verbose so a long build shows progress instead of looking hung.
+  # A package that will not install must not abort the run: the symlinks below
+  # matter more than any one formula. Failures are reported again at the end.
+  if ! brew bundle --file="$DOTFILES/Brewfile" --verbose; then
+    brew_failed=1
+    warn "Some Brewfile entries failed; continuing with the rest of the setup."
+  fi
 fi
 
 # --- 4. Oh My Zsh ------------------------------------------------------------
@@ -86,7 +93,7 @@ link "$DOTFILES/powerline-shell/config.json" "$HOME/.config/powerline-shell/conf
 # Links the shared settings/keybindings/snippets into every editor that is
 # installed (casks come from the Brewfile) and installs their extensions.
 info "Configuring editors..."
-"$DOTFILES/editors/install.sh"
+"$DOTFILES/editors/install.sh" || warn "editors/install.sh failed; continuing."
 
 # --- 8. Git identity (untracked, per-machine) --------------------------------
 if [ ! -f "$HOME/.gitconfig.local" ]; then
@@ -95,13 +102,20 @@ if [ ! -f "$HOME/.gitconfig.local" ]; then
 fi
 
 # --- 9. macOS defaults (optional) -------------------------------------------
-read -r -p "Apply macOS defaults (osx/set-defaults.sh)? [y/N] " reply
+reply=""
+if [ -t 0 ]; then
+  read -r -p "Apply macOS defaults (osx/set-defaults.sh)? [y/N] " reply || true
+fi
 if [[ "$reply" =~ ^[Yy]$ ]]; then
   sh "$DOTFILES/osx/set-defaults.sh"
 fi
 
 # --- Done --------------------------------------------------------------------
 ok "Personal setup complete. Open a new terminal."
+if [ "$brew_failed" -ne 0 ]; then
+  warn "Some Homebrew packages did NOT install. Retry just those with:"
+  warn "  brew bundle --file=\"$DOTFILES/Brewfile\" --verbose"
+fi
 warn "Puzzle (work) config is NOT installed by this script."
 warn "On a work machine, restore ~/.extra (secrets via 1Password) — see README.md."
 warn "No Node version manager is installed here; ~/.extra sets up fnm on work machines."
