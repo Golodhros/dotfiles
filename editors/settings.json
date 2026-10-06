@@ -133,4 +133,5 @@
     "gitlens.statusBar.reduceFlicker": false,
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.hideUnchangedRegions.enabled": true,
+    "claudeCode.preferredLocation": "panel",
 }
