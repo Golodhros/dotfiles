@@ -4,11 +4,14 @@ alias gb="git branch"
 alias gt="git checkout "
 alias gd="git diff"
 alias gc="git commit"
+
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cg  reen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias glme="git log --author='Marcos Iglesias'"
-alias ga="git commit --amend --no-edit"
 
-alias gri="git rebase -i HEAD~10" #10 is an arbitrary number, by tastes
+alias ga="git commit --amend --no-edit"
+alias gri="git rebase -i HEAD~10"
+
+alias gfa="git fetch --all --prune"
 alias gpr="git pull --rebase origin master"
 alias gpm="git pull --rebase origin main"
 
