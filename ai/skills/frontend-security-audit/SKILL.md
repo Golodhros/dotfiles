@@ -1,29 +1,29 @@
 ---
 name: frontend-security-audit
-description: Perform an OWASP-based, read-only security audit of the Epsilon frontend on main, verify reachable vulnerabilities and shipped dependency advisories, compare with the previous audit, and publish an AIM report.
+description: Use when auditing a web frontend for security issues — performs an OWASP-based, read-only audit of the repository's default branch, verifies reachable vulnerabilities and shipped dependency advisories, compares with the previous audit, and writes a severity-ranked report to plan/security-audits/.
 ---
 
 # Frontend Security Audit
 
-Audit the browser-delivered code in `accrual-dev/epsilon` on `main`. Find vulnerability indicators, confirm their reachability, and publish one severity-ranked report as an AIM document plus a concise chat reply.
+Audit the browser-delivered code in the current repository on its default branch. Find vulnerability indicators, confirm their reachability, and write one severity-ranked report plus a concise chat reply.
 
-This skill is adapted from the [Frontend Security Audit routine](https://arc.accrual.dev/routines/rout_sys_frontend_security_audit), whose [built-in definition](https://github.com/accrual-dev/aim/blob/main/packages/built-ins/src/routines/frontend-security-audit.ts) runs weekly with cron `0 7 * * 0`. The skill performs one audit per invocation; scheduling remains outside the skill.
+The skill performs one audit per invocation. To run it on a schedule, trigger it from outside the skill.
 
 ## Scope and boundaries
 
-- There is no target pull request. Do not ask for a PR URL or number, open or complete an `AIM Code Review` check run, submit a PR review, or post GitHub comments.
-- Keep the audit read-only. No production access, code changes, commits, pushes, fix branches, or pull requests, including drafts. Saving the requested audit document is the output operation. If a finding warrants an immediate fix, state that in the report and stop there.
-- Never include secrets, credentials, tokens, API keys, customer records, or tax data in reports or chat. For sensitive findings, cite only the file, line, and identifier name; never include the value, even in snippets or audit output.
+- There is no target pull request. Do not ask for a PR URL or number, submit a PR review, or post GitHub comments.
+- Keep the audit read-only. No production access, code changes, commits, pushes, fix branches, or pull requests, including drafts. Saving the audit report is the only write. If a finding warrants an immediate fix, state that in the report and stop there.
+- Never include secrets, credentials, tokens, API keys, customer records, or other personal data in reports or chat. For sensitive findings, cite only the file, line, and identifier name; never include the value, even in snippets or audit output.
 - Report only confirmed findings traced to real `file:line` locations opened and read in the checkout. An unverified search hit or speculative data flow is not a finding at any severity.
 - A run with no findings is successful. Report zero counts and the actual coverage.
 
 ## Establish the checkout and coverage
 
-Use the current date for the audit. Confirm the checkout is `accrual-dev/epsilon` on `main` and record the audited revision. Do not overwrite local changes to establish the checkout.
+Use the current date for the audit. Confirm the checkout is on the default branch and record the audited revision. Do not overwrite local changes to establish the checkout.
 
-Epsilon is a pnpm monorepo. The browser app is expected under `apps/firm/app-srv`; shared UI ships from packages such as `packages/compound`. Server-rendered and email/PDF templates reachable from the browser are also in scope.
+Identify the browser app or apps and the shared UI packages they ship (call these `<frontend-paths>` below). Server-rendered and email/PDF templates reachable from the browser are also in scope.
 
-Confirm the actual layout using `pnpm-workspace.yaml` and the app structure before scanning. Do not assume a flat repository or that previous audit paths remain correct. Scope searches to browser-delivered source and relevant rendering paths, rather than treating all monorepo code as frontend code.
+Confirm the actual layout using the workspace configuration (`pnpm-workspace.yaml`, `package.json` workspaces, or equivalent) and the app structure before scanning. Do not assume a flat repository or that previous audit paths remain correct. Scope searches to browser-delivered source and relevant rendering paths, rather than treating all monorepo code as frontend code.
 
 ## Find candidates and trace their inputs
 
@@ -35,12 +35,12 @@ Treat these as high-priority candidates, not automatically high-severity finding
 
 - React HTML injection:
   ```bash
-  rg -n "dangerouslySetInnerHTML" apps/firm/app-srv packages -g "*.tsx" -g "*.jsx" -g "*.ts" -g "*.js"
+  rg -n "dangerouslySetInnerHTML" <frontend-paths> -g "*.tsx" -g "*.jsx" -g "*.ts" -g "*.js"
   ```
 - Direct DOM writes: `.innerHTML =`, `.outerHTML =`, `document.write`, and `insertAdjacentHTML`.
 - URL-based injection: assignments to `location.href`, calls to `location.replace`, and `window.open`.
 - Code execution: `eval(`, `new Function(`, and string-valued `setTimeout` or `setInterval`.
-- Unescaped template output, including Twig `|raw` and `{% autoescape false %}`, wherever server-side or email/PDF templates are rendered.
+- Unescaped template output, such as Twig `|raw` and `{% autoescape false %}` or Handlebars `{{{ }}}`, wherever server-side or email/PDF templates are rendered.
 
 ### CSRF
 
@@ -50,7 +50,7 @@ Treat these as high-priority candidates, not automatically high-severity finding
 
 ### Sensitive data exposure
 
-- Inspect `localStorage` and `sessionStorage` usage for session, identity, tax, or customer data.
+- Inspect `localStorage` and `sessionStorage` usage for session, identity, personal, or customer data.
 - Search for hardcoded secret indicators such as `api[_-]?key\s*[:=]`, `secret\s*[:=]`, `password\s*[:=]`, and `token\s*[:=]`.
 - Verify whether a candidate is a real secret or sensitive value without reproducing it in output.
 
@@ -117,9 +117,9 @@ For every finding, explicitly state whether the sink receives a user-controlled,
 
 ## Compare with the previous report
 
-Before writing, locate the prior week's “Epsilon Frontend Security Audit” report through AIM document discovery and read it with `read_document`. Deduplicate findings and mark them `new`, `unchanged`, or `resolved`.
+Before writing, read the most recent report in `plan/security-audits/`. Deduplicate findings and mark them `new`, `unchanged`, or `resolved`.
 
-List findings resolved since the prior report so the audit explains the change over time. Use current evidence to establish resolution; an area not inspected is not evidence that a finding was fixed. If no prior report exists, say so and mark all findings `new`. If prior-report access fails, disclose that comparison gap.
+List findings resolved since the prior report so the audit explains the change over time. Use current evidence to establish resolution; an area not inspected is not evidence that a finding was fixed. If no prior report exists, say so and mark all findings `new`. If the prior report cannot be read, disclose that comparison gap.
 
 ## Publish the report
 
@@ -158,11 +158,6 @@ and anything that could not be inspected or verified.
 
 Use the same finding fields for each severity. Count current findings separately from resolved findings, and avoid double-counting dependency advisories. For zero findings, write the explicit count, such as `Critical: 0`, and plainly state that none were found at that severity. Do not pad empty sections.
 
-Save the full report using `write_document`:
+Save the full report to `plan/security-audits/frontend-security-audit-<YYYY-MM-DD>.md`, creating the folder if needed.
 
-- `name`: `Epsilon Frontend Security Audit - <YYYY-MM-DD>`
-- `mediaType`: `text/markdown`
-- `intent`: a sentence identifying the weekly frontend security audit
-- `content`: the full Markdown report
-
-Reply in chat with a TL;DR only: per-severity counts, top findings with `file:line`, the new/unchanged/resolved split, and the returned document URL.
+Reply in chat with a TL;DR only: per-severity counts, top findings with `file:line`, the new/unchanged/resolved split, and the report path.
