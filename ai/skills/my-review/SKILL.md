@@ -29,10 +29,11 @@ If the variable is unset, say so and stop. Do not guess a folder.
 ## Scope
 
 - No argument: the branch's change set under `F/`. Working tree plus commits
-  since the merge base with `main`:
-  `git diff --name-only $(git merge-base HEAD origin/main) -- $F`, plus
-  `git diff --name-only -- $F`, plus untracked files from
-  `git status --porcelain -- $F`.
+  since the merge base with the default branch, which
+  `git symbolic-ref --short refs/remotes/origin/HEAD` gives (stop and report
+  the error if it fails):
+  `git diff --name-only --merge-base <default-branch> -- $F`, plus untracked
+  files from `git status --porcelain -- $F`.
 - With a path argument (`/my-review F/some/+components`): that path, whatever
   its git state. A path that does not start with `F/` is out of scope; say so.
 - Only `.ts` and `.tsx`. Skip `F/+lib/copy.ts`, every `*.test.*`, and every

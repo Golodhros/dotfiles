@@ -140,6 +140,9 @@ if [ "$brew_failed" -ne 0 ]; then
   warn "Some Homebrew packages did NOT install. Retry just those with:"
   warn "  brew bundle --file=\"$DOTFILES/Brewfile\" --verbose"
 fi
+if ! gh auth status >/dev/null 2>&1; then
+  warn "GitHub HTTPS credentials come from gh. Sign in with: gh auth login"
+fi
 warn "Puzzle (work) config is NOT installed by this script."
 warn "On a work machine, restore ~/.extra (secrets via 1Password) — see README.md."
 warn "No Node version manager is installed here; ~/.extra sets up fnm on work machines."

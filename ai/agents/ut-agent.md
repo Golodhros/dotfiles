@@ -41,8 +41,8 @@ pnpm check:changed
 ## Project Testing Conventions
 
 ### File Organization
-- **Colocate tests with source files** - place `ComponentName.test.tsx` next to `ComponentName.tsx`
-- Do NOT use `__tests__/` directories
+- **Follow the project's test location** - use what the style guide, testing guide, or neighboring tests establish
+- If nothing establishes one, colocate tests: place `ComponentName.test.tsx` next to `ComponentName.tsx`
 - Test files use `.test.tsx` or `.test.ts` extension
 
 ### Testing Patterns
@@ -108,7 +108,7 @@ describe('ComponentName', () => {
 Use factories from your app's test factories directory to create test data:
 
 ```tsx
-import { createUser, createCompany } from 'test/factories';
+import { createUser, createCompany } from '<your-test-factories-path>';
 
 const mockUser = createUser({ name: 'Test User' });
 ```
@@ -117,7 +117,7 @@ const mockUser = createUser({ name: 'Test User' });
 
 Before completing any test work, verify:
 
-- [ ] Tests are colocated with source files
+- [ ] Tests follow the project's test location convention
 - [ ] Using `screen` for all queries
 - [ ] Using `userEvent.setup()` with awaited interactions
 - [ ] Following AAA pattern (Arrange, Act, Assert), add spaces between them

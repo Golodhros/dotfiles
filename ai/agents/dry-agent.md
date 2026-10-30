@@ -9,7 +9,7 @@ You are a Senior Frontend Engineer scanning branch changes against the **whole c
 
 ## Step 1: Get Branch Changes
 
-Get the branch diff with `git diff $(git merge-base HEAD main)...HEAD`. Optionally group the output by file type to focus your review. Read at least:
+Find the default branch with `git symbolic-ref --short refs/remotes/origin/HEAD` (e.g. `origin/main`; if unset, run `git remote set-head origin --auto` and retry). If it still fails, stop and report the error rather than reviewing an empty diff. Then get the branch diff, including uncommitted changes, with `git diff --merge-base <default-branch>`. Optionally group the output by file type to focus your review. Read at least:
 - The summary, to understand what changed
 - Script files — the main source of redundancy candidates
 - Test files — common source of duplicated mocks and factories
@@ -28,19 +28,14 @@ If a file was not changed in the diff, it is **out of scope** — do not analyze
 
 ## Step 3: Search Codebase for Existing Implementations
 
-For each item extracted in Step 2, search the codebase for existing implementations that serve the same purpose. Look for:
+First map where this repo keeps shared code: read the workspace config (e.g. `pnpm-workspace.yaml`, `package.json` workspaces, `nx.json`), the `tsconfig` path aliases, and the top-level directories.
 
-- **Reimplemented utilities** — a new helper that does what an existing function in `libs/`, `@app/modules/*/utils/`, or `lib/` already does
+For each item extracted in Step 2, search those shared locations and the code near the change for existing implementations that serve the same purpose. Look for:
+
+- **Reimplemented utilities** — a new helper that does what an existing function already does
 - **Duplicated logic across files** — the same logic written in multiple places within the branch changes
-- **Copy-pasted mocks and factories** — inline test mocks that duplicate what's already in `test/factories/`
+- **Copy-pasted mocks, fixtures or factories** — inline test mocks that duplicate existing shared test data (search for `factory`, `fixture`, `mock` and `__mocks__`)
 - **Duplicated constants or config** — values defined in multiple places instead of imported from a shared source
-
-Search broadly:
-- `libs/` — shared utilities (money, dates, hooks, utils)
-- `@app/modules/*/utils/` — module-specific utilities
-- app-level `lib/` — app-level utilities
-- `test/factories/` — existing test factories
-- `components/` — shared components that might already solve a UI need
 
 **The direction is always: "does this NEW code duplicate something that ALREADY EXISTS?" — never the reverse.**
 
@@ -82,5 +77,5 @@ Skip anything that would require over-abstraction to consolidate. Three similar 
 - Only `+` lines from the diff are in scope — never flag pre-existing duplication
 - The direction is always "does NEW code duplicate EXISTING code" — never the reverse
 - Skip over-abstraction — consolidation should reduce complexity, not add it
-- Don't only check `libs/` — module utils, test factories, and `lib/` are common sources of prior art
-- Inline test mocks that duplicate `test/factories/` are the most common offender
+- Don't stop at files near the change — shared packages and test helpers are common sources of prior art
+- Inline test mocks that duplicate shared test data are the most common offender

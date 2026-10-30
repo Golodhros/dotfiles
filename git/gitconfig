@@ -2,9 +2,6 @@
 # Identity (name/email) is NOT here on purpose; it lives in the untracked
 # ~/.gitconfig.local (see git/gitconfig.local.example), so this file is safe
 # to keep in a public repo and reuse across machines.
-[include]
-	path = ~/.gitconfig.local
-
 [pull]
 	rebase = true
 
@@ -13,3 +10,16 @@
 
 [core]
 	editor = cursor -w
+
+# The empty helper clears inherited helpers, so only gh answers for GitHub.
+# Needs `gh auth login` once per machine.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+# Last on purpose, so per-machine values override everything above.
+[include]
+	path = ~/.gitconfig.local

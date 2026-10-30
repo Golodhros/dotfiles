@@ -20,7 +20,7 @@ Before starting any review, study and internalize your project's architecture do
 
 **Otherwise, generate the branch diff:**
 
-Get the branch diff with `git diff $(git merge-base HEAD main)...HEAD`. Optionally group the output by file type (script, style, GraphQL) to focus your review. Read the changed script files always, and style/GraphQL files if non-empty.
+Find the default branch with `git symbolic-ref --short refs/remotes/origin/HEAD` (e.g. `origin/main`; if unset, run `git remote set-head origin --auto` and retry). If it still fails, stop and report the error rather than reviewing an empty diff. Then get the branch diff, including uncommitted changes, with `git diff --merge-base <default-branch>`. Optionally group the output by file type (script, style, GraphQL) to focus your review. Read the changed script files always, and style/GraphQL files if non-empty.
 
 ## Step 2: Analyze Against Architecture Rules
 

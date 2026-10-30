@@ -48,7 +48,7 @@ digraph quality {
 
 ### Step 1: Generate Branch Diff
 
-Get the branch diff with `git diff $(git merge-base HEAD main)...HEAD`.
+Find the default branch with `git symbolic-ref --short refs/remotes/origin/HEAD` (e.g. `origin/main`; if unset, run `git remote set-head origin --auto` and retry). If it still fails, stop and report the error rather than reviewing an empty diff. Then get the branch diff, including uncommitted changes, with `git diff --merge-base <default-branch>`.
 
 Optionally group the diff by file type so all four reviews can consume it consistently.
 
