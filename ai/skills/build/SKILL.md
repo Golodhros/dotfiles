@@ -30,7 +30,7 @@ If your project uses an ESLint opt-in file list, ensure all relevant changed fil
 
 ### Final Step 2: Generate Diff
 
-Get the branch diff with `git diff $(git merge-base HEAD main)...HEAD` so the `/quality` skill can review it later.
+Find the default branch with `git symbolic-ref --short refs/remotes/origin/HEAD` (e.g. `origin/main`; if unset, run `git remote set-head origin --auto` and retry). If it still fails, stop and report the error rather than reviewing an empty diff. Then get the branch diff, including uncommitted changes, with `git diff --merge-base <default-branch>` so the `/quality` skill can review it later.
 
 ### Final Step 3: Quality review
 

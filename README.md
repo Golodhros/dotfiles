@@ -24,7 +24,8 @@ git clone git@github.com:Golodhros/dotfiles.git ~/.dotfiles
 6. Creates `~/.gitconfig.local` from the example (your git identity).
 7. Optionally applies macOS defaults (`osx/set-defaults.sh`).
 
-After it finishes, open a new terminal. **Work (Puzzle) setup is intentionally not part
+After it finishes, open a new terminal and run `gh auth login`: git's HTTPS credentials
+for GitHub come from `gh`. **Work (Puzzle) setup is intentionally not part
 of this** — see "Work vs Personal" below.
 
 ## How It Works (loading chain)

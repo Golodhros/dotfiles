@@ -9,4 +9,5 @@ ms-vscode.sublime-keybindings
 openai.chatgpt
 shardulm94.trailing-spaces
 shd101wyy.markdown-preview-enhanced
+unifiedjs.vscode-mdx
 yoavbls.pretty-ts-errors

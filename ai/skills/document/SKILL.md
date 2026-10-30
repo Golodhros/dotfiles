@@ -20,7 +20,7 @@ Documentation pipeline that dispatches the `doc-agent` to update READMEs, JSDoc,
 
 ### Step 1: Identify Changed Modules and Features
 
-1. Run `git merge-base HEAD main` first to get the merge base SHA, then run `git diff --name-only <SHA>...HEAD` using the result (avoid `$()` command substitution to prevent permission prompts)
+1. Run `git symbolic-ref --short refs/remotes/origin/HEAD` first to get the default branch (e.g. `origin/main`; if unset, run `git remote set-head origin --auto` and retry; if it still fails, stop and report the error), then run `git diff --name-only --merge-base <default-branch>` using the result (avoid `$()` command substitution to prevent permission prompts)
 2. Extract unique module and feature folders from the changed file paths:
    - Modules: paths matching `apps/<app>/modules/<name>/`
    - Features: paths matching `apps/<app>/features/<name>/`
